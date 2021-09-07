@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/p5ble@0.0.4/dist/p5.ble.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="favicon.png" />
+</head>
+
+<body>
+
+    <body>
+        <div class="container py-5" id="app">
+            <div class="row">
+                <div class="col-md-10 mx-auto">
+                    <h1>Workout Classifier</h1>
+                    <p>TODO</p>
+                    <h5 class="mt-5 mb-3" mb-3>1. Step - Specify Connection Details</h5>
+                    <form onsubmit="return false;">
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label for="serviveUUID">Service UUID of Peripheral:</label>
+                                <input type="text" class="form-control" id="serviveUUID" v-model="serviceUUID"
+                                    :disabled="isConnected" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-12">
+                                <label class='d-block'>Establish the Connection:</label>
+                                <input @click="connectBLE" type="submit" value="Connect" class="btn btn-success px-4"
+                                    :disabled="isConnected">
+                                <button @click="disconnectBLE" type="button" :disabled="!isConnected"
+                                    class="btn btn-danger px-4">Disconnect</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div v-if="isConnected">
+                <hr />
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                        <h5 class="mt-5 mb-3">2. Step - Check the Connection</h5>
+                        <form onsubmit="return false;">
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label>Raw Data:</label>
+                                    <p type="text" class="form-control">
+                                        {{log}}
+                                    <p>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-12">
+                                    <label class="d-block">Start the Workout:</label>
+                                    <button @click="startRecording" type="button" :disabled="isRecording"
+                                        class="btn btn-success px-4">Start</button>
+                                    <button @click="stopRecording" type="button" :disabled="!isRecording"
+                                        class="btn btn-danger px-4">Stop</button>
+                                    <button @click="resetRecording" type="button" :disabled="!hasTrackingData"
+                                        class="btn btn-secondary px-4">Reset</button>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <label for="delta">Delta per Classification</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control" id="delta" v-model="delta"
+                                            placeholder="{{delta}}" min=0 required :disabled="isRecording">
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">s</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label for="noExercise">No Exercise Identifier</label>
+                                    <input type="text" class="form-control" placeholder="{{noExercise}}"
+                                        v-model="noExercise" id="noExercise" required :disabled="isRecording">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="(isRecording || hasTrackingData) && isConnected">
+                <hr />
+                <div class="row">
+                    <div class="col-md-10 mx-auto">
+                        <h5 class="mt-5 mb-3">3. Step - Perform your Workout</h5>
+                        <form onsubmit="return false;">
+                            <div class="form-group row">
+                                <div class="col-sm-4" v-for="(value, name) in tracker">
+                                    <label>{{name}}:</label>
+                                    <div class="input-group">
+                                        <p class="form-control">{{value}}</p>
+                                        <div class="input-group-append">
+                                            <div class="input-group-text">s</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <footer class="navbar fixed-bottom bg-dark">
+                <div class="text-white">Made with <span class="fa fa-heart text-danger"></span> in
+                    Bavaria by <a href="https://ludwigstumpp.com" target="_blank">Ludwig Stumpp</a>.
+                </div>
+            </footer>
+
+            <script src="index.js"></script>
+    </body>
+
+</html>
