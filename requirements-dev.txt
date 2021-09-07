@@ -1,0 +1,4 @@
+pipreqs==0.4.10
+flake8==3.9.2
+mypy==0.910
+autopep8==1.5.7
