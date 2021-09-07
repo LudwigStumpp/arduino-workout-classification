@@ -62,5 +62,17 @@ const app = new Vue({
             this.isRecording = false;
             this.tracker = {};
         },
+        downloadData: function () {
+            let rows = [];
+            rows[0] = Object.keys(this.tracker);
+            rows[1] = Object.values(this.tracker);
+            const csvContent = "data:text/csv;charset=utf-8," + rows.map(e => e.join(",")).join("\n");
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "workout_data.csv");
+            document.body.appendChild(link); // Required for FF
+            link.click();
+        }
     }
 })
