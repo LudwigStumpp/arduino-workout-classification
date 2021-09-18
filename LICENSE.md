@@ -25,7 +25,7 @@ SOFTWARE.
 # Third Party Software
 
 ### Classifier Script, Edge Impulse
-`classifier/WorkoutClassification.ino`
+`arduino-classifier/`
 
 Edge Impulse Arduino examples
 Copyright (c) 2021 EdgeImpulse Inc.
