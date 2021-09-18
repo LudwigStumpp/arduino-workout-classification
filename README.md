@@ -60,10 +60,10 @@ Find a full presentation of the project under TBD.
 ### 4.2 Resample Training Data to constant sampling rate
 - here: aiming for constant 20ms timesteps in recording data
 - create virtual Python environment of your choice and install dependencies listed in `requirements.txt`
-- move all your `training.csv` files in the folder `resampler/in`
-- cd into `resampler`
+- move all your `training.csv` files in the folder `python-resampler/in`
+- cd into `python-resampler`
 - run `python resample.py`
-- find resamples data in folder `resampler/out`
+- find resamples data in folder `python-resampler/out`
 
 ### 4.3 Upload Training Data to Edge Impulse and Train Classifier
 - data uploaded to [Edge Impulse Platform](https://www.edgeimpulse.com/)
