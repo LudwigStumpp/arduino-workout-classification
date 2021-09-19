@@ -1,7 +1,9 @@
 # Arduino Workout Classification
 Classifying workout exercises on an Arduino Nano 33 BLE Sense board.
 
-Find a full presentation of the project under TBD.
+Find a full presentation of the project [here](https://drive.google.com/file/d/1G4dQALbxBdeZpapsI8XYGSf9UMNIbGGa/view?usp=sharing) and the slides under `project_presentation.pdf`.
+
+Special thanks to [Machine Learning Tokyo](https://machinelearningtokyo.com/) for their series on Edge AI during which this project was created.
 
 ## 1. Goal
 - continuous classification of three exercise types: Jumping-Jacks, Push-Ups, Squats
